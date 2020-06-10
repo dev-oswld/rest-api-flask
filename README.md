@@ -1,23 +1,6 @@
 # Rest API with flask :hot_pepper:
-
-## Notes :memo:
-HTTP Methods overview 
-| HTTP Verb | CRUD |
-| --- | --- |
-| POST | Create |
-| GET | Read | 
-| PUT | Update/Replace |
-| PATCH | Update/Modify | 
-| DELETE | Delete | 
-
-HTTP Status codes
-| Code | About | Description | 
-| --- | --- | --- |
-| 1xx | Informational response | The request was received, continuing process | 
-| 2xx | successful | The request was successfully received, understood, and accepted |
-| 3xx | Redirection  | Further action needs to be taken in order to complete the request |
-| 4xx | Client error | The request contains bad syntax or cannot be fulfilled |
-| 5xx | Server error | The server failed to fulfil an apparently valid request |
+![GitHub last commit](https://img.shields.io/github/last-commit/dev-oswld/rest-api-flask?&style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/dev-oswld/rest-api-flask?color=orange&style=for-the-badge)
 
 ## Resources
 - [Flask documentation](https://readthedocs.org/projects/flask/)
@@ -28,5 +11,7 @@ HTTP Status codes
 - [Flask course (spanish)](https://www.youtube.com/playlist?list=PLBO4apWPK7b7K6c-jpEI0zflZYDjVp7cd)
 - [REST API course (spanish)](https://www.youtube.com/playlist?list=PLBO4apWPK7b6tRI_B1MQGZfvI6c3ViQd-)
 
-## Thank you @codenoschool :octocat:
+## :octocat: Thank you [CodeNoSchool](https://github.com/codenoschool)! 
 Repository for this course [here](https://github.com/codenoschool/flask-course) 
+
+[Go to notes](./Notes/README.md)
