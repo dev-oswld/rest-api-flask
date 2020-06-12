@@ -1,6 +1,6 @@
 ## Notes :memo:
 
-<img src="venn-diagram.png" alt="venn-diagram" style="width:300px; display: block; margin: 0 auto;"/>
+<img src="venn-diagram.png" alt="venn-diagram" style="width:200px; display: block; margin: 0 auto;"/>
 
 <center>
 
@@ -12,6 +12,8 @@
 | URC | Uniform Resource Citation | view-source:https://github.com/ | 
 
 </center>
+
+---
 
 HTTP Methods overview 
 | HTTP Verb | CRUD |
@@ -32,5 +34,7 @@ HTTP Status codes
 | 3xx | Redirection  | Further action needs to be taken in order to complete the request |
 | 4xx | Client error | The request contains bad syntax or cannot be fulfilled |
 | 5xx | Server error | The server failed to fulfil an apparently valid request |
+
+---
 
 [Go to start](.././README.md)
