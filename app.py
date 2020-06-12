@@ -5,7 +5,9 @@ app = Flask(__name__)
 # Decorator route
 @app.route("/")
 def index():
-    return render_template("index.html")
+    title = "A title with emoji 👌"
+    list = ["i", "love", "python"]
+    return render_template("index.html", title=title, list=list)
 
 # Extra
 @app.route("/about")
