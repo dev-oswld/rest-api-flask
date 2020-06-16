@@ -16,4 +16,4 @@
 ## :octocat: Thank you [CodeNoSchool](https://github.com/codenoschool)! 
 Repository for this course [here](https://github.com/codenoschool/flask-course) 
 
-[Go to notes](./Notes/README.md)
+[Go to notes](./my-notes/README.md)
