@@ -15,7 +15,7 @@
 
 ---
 
-HTTP Methods overview 
+**HTTP Methods overview** 
 | HTTP Verb | CRUD |
 | --- | --- |
 | POST | Create |
@@ -26,7 +26,7 @@ HTTP Methods overview
 
 ---
 
-HTTP Status codes
+**HTTP Status codes**
 | Code | About | Description | 
 | --- | --- | --- |
 | 1xx | Informational response | The request was received, continuing process | 
@@ -36,5 +36,9 @@ HTTP Status codes
 | 5xx | Server error | The server failed to fulfil an apparently valid request |
 
 ---
+
+**Cookies**
+
+Is a small piece of data, they are different types for example: session cookies, permanent cookies, secure cookies, http-only cookies, third-party cookies and so on. A cookie consists of the following two or more components name and value. 
 
 [Go to start](.././README.md)
