@@ -7,6 +7,7 @@
 - [HTTP status codes](https://httpstatuses.com/)
 - [Learn RESTful API](https://www.restapitutorial.com/)
 - [URIs, URLs and URNs](https://www.w3.org/TR/uri-clarification/)
+- [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 - [API Design Cheat Sheet](https://github.com/RestCheatSheet/api-cheat-sheet)
 - [What is idempotence?](https://www.youtube.com/watch?v=6dVNdFwqeKs)
 - [Flask course (spanish)](https://www.youtube.com/playlist?list=PLBO4apWPK7b7K6c-jpEI0zflZYDjVp7cd)
