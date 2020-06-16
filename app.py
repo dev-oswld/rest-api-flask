@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -9,31 +10,51 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 # Class for DB
-class Posts(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50))
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(80), nullable=False) # this length for hashing
     
 # Decorator route
 @app.route("/")
 def index():
-    title = "A title with emoji 👌"
-    list = ["i", "love", "python"]
-    return render_template("index.html", title=title, list=list)
+    return render_template("index.html")
 
-# Insert method
-@app.route("/insert/default")
-def insert_default():
-    new_post = Posts(title="Default title")
-    db.session.add(new_post)
-    db.session.commit()
-    return "The post was created"
+# file ➡️ signup.html
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    # sha256 for encrypting the password
+    if request.method == "POST":
+        hashed_pw = generate_password_hash(request.form["password"], method="sha256")
+        new_user = Users(username=request.form["username"], password=hashed_pw)
+        db.session.add(new_user)
+        db.session.commit()
 
-# Select method
-@app.route("/select/default")
-def select_default():
-    post = Posts.query.filter_by(id=1).first()
-    print(post.title)
-    return "Query done, look the console"
+        return "You've registered successfully"
+        
+    return render_template("singup.html")
+
+# file ➡️ login.html
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        user = Users.query.filter_by(username=request.form["username"]).first()
+        if user and check_password_hash(user.password, request.form["password"]):
+            return "You are logged in"
+
+        return "Your credentials are invalid, check and try again"
+    
+    return render_template("login.html")
+
+# file ➡️ index.html
+@app.route("/search")
+def search():
+    nickname = request.args.get("userone")
+    user = Users.query.filter_by(username=nickname).first()
+
+    if user: 
+        return user.username
+    return "The user doesn't exist."
 
 # Extra
 @app.route("/about")
