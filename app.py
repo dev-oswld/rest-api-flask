@@ -1,5 +1,5 @@
+from flask import Flask, render_template, request, make_response, session, escape
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -19,6 +19,26 @@ class Users(db.Model):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+# file ➡️ index/welcome.html
+@app.route("/search")
+def search():
+    nickname = request.args.get("nickname")
+    user = Users.query.filter_by(username=nickname).first()
+
+    if user: 
+        status = "how are you?"
+        return render_template("welcome.html", status=status, user=user.username)
+
+    return "The user doesn't exist."
+
+# Session - start
+@app.route("/home")
+def home():
+    if "username" in session:
+        return "hi, you are %s" % escape(session["username"])
+
+    return "You must log in first"
 
 # file ➡️ signup.html
 @app.route("/signup", methods=["GET", "POST"])
@@ -40,28 +60,44 @@ def login():
     if request.method == "POST":
         user = Users.query.filter_by(username=request.form["username"]).first()
         if user and check_password_hash(user.password, request.form["password"]):
+            session["username"] = user.username
             return "You are logged in"
 
         return "Your credentials are invalid, check and try again"
     
     return render_template("login.html")
 
-# file ➡️ index/welcome.html
-@app.route("/search")
-def search():
-    nickname = request.args.get("nickname")
-    user = Users.query.filter_by(username=nickname).first()
+# Session expire - end
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
 
-    if user: 
-        status = "how are you?"
-        return render_template("welcome.html", status= status, user=user.username)
+    return "You are logged out"
 
-    return "The user doesn't exist."
+# Cookies
+@app.route("/cookie/set")
+def set_cookie():
+    resp = make_response(render_template("index.html"))
+    # Params set cookie: name/value
+    resp.set_cookie("uservalue", "dev-oswld")
+
+    return resp
+
+@app.route("/cookie/read")
+def read_cookie():
+    username = request.cookies.get("uservalue", None)
+    if username == None:
+        return "The cookie doesn't exist"
+
+    return username
 
 # Extra
 @app.route("/about")
 def about():
     return "RESTful API with Flask (micro framework)"
+
+# not secure yet, example
+app.secret_key = "secret"
 
 if __name__ == "__main__":
     db.create_all()
