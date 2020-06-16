@@ -46,14 +46,16 @@ def login():
     
     return render_template("login.html")
 
-# file ➡️ index.html
+# file ➡️ index/welcome.html
 @app.route("/search")
 def search():
-    nickname = request.args.get("userone")
+    nickname = request.args.get("nickname")
     user = Users.query.filter_by(username=nickname).first()
 
     if user: 
-        return user.username
+        status = "how are you?"
+        return render_template("welcome.html", status= status, user=user.username)
+
     return "The user doesn't exist."
 
 # Extra
