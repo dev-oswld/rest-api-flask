@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, make_response, session, escape
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
 import os
+from flask import (Flask, escape, flash, make_response, redirect,
+                   render_template, request, session, url_for)
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
@@ -49,8 +50,9 @@ def signup():
         new_user = Users(username=request.form["username"], password=hashed_pw)
         db.session.add(new_user)
         db.session.commit()
+        flash("You've registered successfully", "success") # Message
 
-        return "You've registered successfully"
+        return redirect(url_for("login"))
         
     return render_template("singup.html")
 
@@ -62,9 +64,8 @@ def login():
         if user and check_password_hash(user.password, request.form["password"]):
             session["username"] = user.username
             return "You are logged in"
+        flash("Your credentials are invalid, check and try again", "warning")
 
-        return "Your credentials are invalid, check and try again"
-    
     return render_template("login.html")
 
 # Session expire - end
@@ -94,7 +95,7 @@ def read_cookie():
 # Extra
 @app.route("/about")
 def about():
-    return "RESTful API with Flask (micro framework)"
+    return redirect("https://github.com/dev-oswld")
 
 # not secure yet, example
 app.secret_key = "secret"
