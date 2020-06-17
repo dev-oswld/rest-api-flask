@@ -4,9 +4,31 @@
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Block content -->
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+    <p>
+        {% for message in messages %}
+        <span class="success"> {{ message }} </span>
+        {% endfor %}
+    </p>
+    {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+    {% if messages %}
+    <p>
+        {% for message in messages %}
+        <span class="warning"> <strong>{{ message }}</strong> </span>
+        {% endfor %}
+    </p>
+    {% endif %}
+    {% endwith %}
+
     {% block content %}{% endblock %}
 </body>
 </html>

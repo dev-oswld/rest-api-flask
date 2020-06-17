@@ -1,0 +1,13 @@
+h2, body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.success {
+  color: cornflowerblue;
+  border-style: dotted;
+}
+
+.warning {
+  color: orange;
+  border-style: solid;
+}
