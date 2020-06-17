@@ -4,6 +4,7 @@
 
 ## Resources
 - [Flask documentation](https://readthedocs.org/projects/flask/)
+- [Full Stack Python](https://www.fullstackpython.com/)
 - [HTTP status codes](https://httpstatuses.com/)
 - [Learn RESTful API](https://www.restapitutorial.com/)
 - [URIs, URLs and URNs](https://www.w3.org/TR/uri-clarification/)
