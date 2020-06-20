@@ -1,0 +1,26 @@
+<!-- file ➡️ signup.html -->
+{% macro render_input(name, placeholder, type="text") %}
+<p><input name="{{ name }}" type="{{ type }}" placeholder="{{ placeholder }}"></p>
+{% endmacro %}
+
+{% macro render_messages(messages) %}
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+{% if messages %}
+<p>
+    {% for message in messages %}
+    <span class="success"> {{ message }} </span>
+    {% endfor %}
+</p>
+{% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["warning"]) %}
+{% if messages %}
+<p>
+    {% for message in messages %}
+    <span class="warning"> <strong>{{ message }}</strong> </span>
+    {% endfor %}
+</p>
+{% endif %}
+{% endwith %}
+{% endmacro %}
