@@ -4,7 +4,10 @@ from flask import (Flask, escape, flash, make_response, redirect,
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
+# Jinja whitespacing 
 app = Flask(__name__)
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
 app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
