@@ -3,6 +3,7 @@ from flask import (Flask, escape, flash, g, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+from requests import get
 
 # Jinja whitespacing 
 app = Flask(__name__)
@@ -102,6 +103,11 @@ def read_cookie():
         return "The cookie doesn't exist"
 
     return username
+
+@app.route("/info")
+def show_info():
+     info = get("http://localhost:2020/api/info").json()
+     return render_template("info.html", info=info)
 
 # Extra
 @app.route("/about")
