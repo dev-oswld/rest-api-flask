@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %} 👇 Info by endpoint 👇 {% endblock %}
+{% block content %}
+    <h2>Random info</h2>
+    {% if info %}
+        <p>{{ info["info"]["names"]}}</p>
+    {% else %}
+        <p>There are no content</p>
+    {% endif %}
+{% endblock %}
