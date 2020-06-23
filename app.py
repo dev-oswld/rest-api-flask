@@ -1,5 +1,5 @@
 import os
-from flask import (Flask, escape, flash, make_response, redirect,
+from flask import (Flask, escape, flash, g, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -19,6 +19,14 @@ class Users(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False) # this length for hashing
     
+@app.before_request
+def before_request():
+    # A global object
+    if "username" in session:
+        g.user = session["username"]
+    else:
+        g.user = None
+
 # Decorator route
 @app.route("/")
 def index():
@@ -39,8 +47,8 @@ def search():
 # Session - start
 @app.route("/home")
 def home():
-    if "username" in session:
-        return "hi, you are %s" % escape(session["username"])
+    if g.user:
+        return "hi, you are %s" % g.user
 
     return "You must log in first"
 
