@@ -41,4 +41,11 @@
 
 Is a small piece of data, they are different types for example: session cookies, permanent cookies, secure cookies, http-only cookies, third-party cookies and so on. A cookie consists of the following two or more components name and value. 
 
+---
+
+**The future**
+- [Tricks for Python](https://realpython.com/)
+- [Django project, write your first app](https://www.djangoproject.com/start/)
+- [Django Web Framework](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django)
+
 [Go to start](.././README.md)
