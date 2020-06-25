@@ -3,12 +3,18 @@ from flask import (Flask, escape, flash, g, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+from example_bp import example_bp
 from requests import get
 
-# Jinja whitespacing 
+# Add blueprint
 app = Flask(__name__)
+app.register_blueprint(example_bp)
+
+# Jinja whitespacing 
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+
+# Database
 dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
 app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
