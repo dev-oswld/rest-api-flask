@@ -7,3 +7,6 @@ flask-project
 # Test and ignore all
 *.txt
 *.db
+
+# Folder (bytecode)
+__pycache__
