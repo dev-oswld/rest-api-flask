@@ -12,6 +12,7 @@
 - [API Design Cheat Sheet](https://github.com/RestCheatSheet/api-cheat-sheet)
 - [Awesome Flask resources and plugins](https://github.com/humiaozuzu/awesome-flask)
 - [Awesome things related to Flask](https://github.com/mjhea0/awesome-flask)
+- [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
 - [What is idempotence?](https://www.youtube.com/watch?v=6dVNdFwqeKs)
 - [Flask course (spanish)](https://www.youtube.com/playlist?list=PLBO4apWPK7b7K6c-jpEI0zflZYDjVp7cd)
 - [REST API course (spanish)](https://www.youtube.com/playlist?list=PLBO4apWPK7b6tRI_B1MQGZfvI6c3ViQd-)
