@@ -34,6 +34,10 @@ def before_request():
     else:
         g.user = None
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html"), 404
+
 # Decorator route
 @app.route("/")
 def index():
