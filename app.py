@@ -1,8 +1,9 @@
 import os
 from flask import (Flask, escape, flash, g, make_response, redirect,
-                   render_template, request, session, url_for)
+                   render_template, request, session, url_for, send_from_directory)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 from example_bp import example_bp
 from requests import get
 
@@ -13,6 +14,11 @@ app.register_blueprint(example_bp)
 # Jinja whitespacing 
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+
+# Upload files
+UPLOAD_FOLDER = os.path.abspath("./uploads")
+ALLOWED_EXTENSIONS = set(["png", "jpg"])
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Database
 dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
@@ -25,7 +31,14 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False) # this length for hashing
-    
+
+
+# Function to allowed files
+def allowed_file(filename):
+    # Loop and split the extension 
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.before_request
 def before_request():
     # A global object
@@ -118,6 +131,50 @@ def read_cookie():
 def show_info():
      info = get("http://localhost:2020/api/info").json()
      return render_template("info.html", info=info)
+
+@app.route("/uploads", methods=["GET", "POST"])
+def upload_file():
+    if request.method == "POST":
+        if not "file" in request.files:
+            return "No file part in the form"
+        f = request.files["file"]
+
+        # Without extension 
+        if f.filename == "":
+            return "No file selected"
+        
+        if f and allowed_file(f.filename):
+            filename = secure_filename(f.filename)
+            # Specific folder
+            f.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            return redirect(url_for("get_file", filename = filename))
+        return "File not allowed"
+
+
+    # Backend to frontend, little example
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Upload File</title>
+    </head>
+    <body>
+        <h2>Upload File</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </body>
+    </html>"""
+
+# Dynamic route
+# Important use < >
+@app.route("/uploads/<filename>")
+def get_file(filename):
+    # Flask function
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 # Extra
 @app.route("/about")
