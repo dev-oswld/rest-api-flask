@@ -127,10 +127,12 @@ def read_cookie():
 
     return username
 
+'''
 @app.route("/info")
 def show_info():
      info = get("http://localhost:2020/api/info").json()
      return render_template("info.html", info=info)
+'''
 
 @app.route("/uploads", methods=["GET", "POST"])
 def upload_file():
