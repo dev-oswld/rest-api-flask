@@ -43,6 +43,14 @@ Is a small piece of data, they are different types for example: session cookies,
 
 ---
 
+**Another resources**
+- [Flask tutorials on Google App Engine](https://code.luasoftware.com/tags/flask/)
+- [Full Stack Web Development with Flask.](https://github.com/realpython/discover-flask)
+- [Flask tutorial in Spanish blog](https://j2logo.com/tutorial-flask-espanol/)
+- [DevWithMe channel](https://www.youtube.com/playlist?list=PLBQzvdjNG8c_Cu3OOlynXPAk-Au5z5x9q)
+
+----
+
 **The future**
 - [Tricks for Python](https://realpython.com/)
 - [Django project, write your first app](https://www.djangoproject.com/start/)
