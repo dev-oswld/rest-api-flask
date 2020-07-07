@@ -20,4 +20,9 @@
 ## :octocat: Thank you [CodeNoSchool](https://github.com/codenoschool)! 
 Repository for this course [here](https://github.com/codenoschool/flask-course) 
 
+Install:
+```sh
+pip install -r requirements.txt
+```
+
 [Go to notes](./my-notes/README.md)
