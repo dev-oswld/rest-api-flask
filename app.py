@@ -1,6 +1,6 @@
 import os
 from flask import (Flask, escape, flash, g, make_response, redirect,
-                   render_template, request, session, url_for, send_from_directory)
+                   render_template, request, session, url_for, send_from_directory, abort)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -51,6 +51,10 @@ def before_request():
 def not_found(e):
     return render_template("404.html"), 404
 
+@app.errorhandler(403)
+def forbidden(e):
+    return render_template("403.html"), 403
+
 # Decorator route
 @app.route("/")
 def index():
@@ -73,8 +77,13 @@ def search():
 def home():
     if g.user:
         return "hi, you are %s" % g.user
+    else:
+        # to-do
+        # jsonify + abort = response(data, status_code)
+        # all in one
+        mssg = "You must login first"
 
-    return "You must log in first"
+    return abort(403)
 
 # file ➡️ signup.html
 @app.route("/signup", methods=["GET", "POST"])
